@@ -9,7 +9,7 @@ urlpatterns = [
     # Домашняя страница
     path('', views.index, name='index'),
     # больше о сайте
-    path('more_about_learning_log/', views.more, name='more'),
+    path('more/', views.more, name='more'),
     # Страница со списком всех тем
     path('topics/', views.topics, name='topics'),
     # Страница с подробной информацией по отдельной теме
