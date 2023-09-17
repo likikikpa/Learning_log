@@ -84,6 +84,10 @@ def edit_entry(request, entry_id):
     return render(request, 'learning_logs/edit_entry.html', context)
 
 
+def more(request):
+    render(request, 'learning_logs/more.html')
+
+
 # Рефракторинг
 def check_topic_owner(request, topic):
     if topic.owner != request.user:
