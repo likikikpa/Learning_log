@@ -85,7 +85,7 @@ def edit_entry(request, entry_id):
 
 
 def more(request):
-    render(request, 'learning_logs/more.html')
+    return render(request, 'learning_logs/more.html')
 
 
 # Рефракторинг
