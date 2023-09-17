@@ -63,7 +63,7 @@ def new_entry(request, topic_id):
             return redirect('learning_logs:topic', topic_id=topic_id)
     # Вывести пустую или недействительную форму
     context = {'topic': topic, 'form': form}
-    return render(request, 'learning_Logs/new_entry.html', context)
+    return render(request, 'learning_logs/new_entry.html', context)
 
 @login_required
 def edit_entry(request, entry_id):
