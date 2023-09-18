@@ -16,9 +16,9 @@ def topics(request):
     # Выводит список тем
     if Topic.public == False:
         topics = Topic.objects.filter(owner=request.user).order_by('date_added')
-    else:
-        topics_public = Topic.objects.order_by('date_added')
-    context = {'topics': topics, 'topics_public': topics_public}
+    elif Topic.public == True:
+        topics = Topic.objects.order_by('date_added')
+    context = {'topics': topics}
     return render(request, 'learning_logs/topics.html', context)
 
 @login_required
