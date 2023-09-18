@@ -17,7 +17,7 @@ def topics(request):
     if Topic.public == False:
         topics = Topic.objects.filter(owner=request.user).order_by('date_added')
     elif Topic.public == True:
-        topics = Topic.objects.filter(public=True)
+        topics = Topic
     context = {'topics': topics}
     return render(request, 'learning_logs/topics.html', context)
 

@@ -16,7 +16,7 @@
     {% endfor %}
   </ul>
   <ul>
-    {% if Topic.public %}
+    {% if Topic.public == True %}
     {% for topic in topics %}
       <li><h6>
         <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }} : Public</a>
