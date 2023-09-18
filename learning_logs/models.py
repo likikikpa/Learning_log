@@ -10,6 +10,7 @@ class Topic(models.Model):
     # Дата создание топика
     date_added = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    public = False
 
     def __str__(self):
         """Возвращает строковое представление модели"""

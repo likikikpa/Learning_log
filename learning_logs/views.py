@@ -14,8 +14,11 @@ def index(request):
 @login_required
 def topics(request):
     # Выводит список тем
-    topics = Topic.objects.filter(owner=request.user).order_by('date_added')
-    context = {'topics': topics}
+    if Topic.public == False:
+        topics = Topic.objects.filter(owner=request.user).order_by('date_added')
+    else:
+        topics_public = Topic.objects.order_by('date_added')
+    context = {'topics': topics, 'public': topics_public}
     return render(request, 'learning_logs/topics.html', context)
 
 @login_required
@@ -31,7 +34,7 @@ def topic(request, topic_id):
 def new_topic(request):
     """Oпределяет новую тему """
     if request.method != 'POST':
-        """ Данные не отпровлялись; создается пустая форма """
+        """ Данные не отправлялись; создается пустая форма """
         form = TopicForm()
     else:
         """ отправленные данные POST, обработать данные"""
@@ -42,7 +45,7 @@ def new_topic(request):
             new_topic.save()
             return redirect('learning_logs:topics')
     # Вывести пустую или не действительную форму
-    context = {'form': form}
+    context = {'form': form, 'TopicForm': TopicForm}
     return render(request, 'learning_logs/new_topic.html', context)
 
 @login_required
@@ -86,6 +89,23 @@ def edit_entry(request, entry_id):
 
 def more(request):
     return render(request, 'learning_logs/more.html')
+@login_required
+def new_topic_public(request):
+    """Oпределяет новую тему """
+    if request.method != 'POST':
+        """ Данные не отправлялись; создается пустая форма """
+        form = TopicForm()
+    else:
+        """ отправленные данные POST, обработать данные"""
+        form = TopicForm(data=request.POST, public=True)
+        if form.is_valid():
+            new_topic = form.save(commit=False)
+            new_topic.owner = request.user
+            new_topic.save()
+            return redirect('learning_logs:topics')
+    # Вывести пустую или не действительную форму
+    context = {'form': form, 'TopicForm': TopicForm}
+    return render(request, 'learning_logs/new_topic_public.html', context)
 
 
 # Рефракторинг
