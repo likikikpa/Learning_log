@@ -18,7 +18,7 @@ def topics(request):
         topics = Topic.objects.filter(owner=request.user).order_by('date_added')
     else:
         topics_public = Topic.objects.order_by('date_added')
-    context = {'topics': topics, 'public': topics_public}
+    context = {'topics': topics, 'topics_public': topics_public}
     return render(request, 'learning_logs/topics.html', context)
 
 @login_required
