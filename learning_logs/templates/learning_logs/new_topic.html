@@ -12,12 +12,9 @@
     {% bootstrap_form form %}
     <button name="submit" class="btn btn-primary">add topic</button>
 </form>
+<A></A>
 
-<form action="{% url 'learning_logs:new_topic_public' %}" method="post">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    <button name="submit" class="btn btn-primary">make public topic </button>
-</form>
+<a class="btn btn-rg btn-success" href="{% url 'learning_logs:new_topic_public' %}">Public</a>
 
 
 {% endblock content %}
