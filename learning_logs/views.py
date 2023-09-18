@@ -14,8 +14,10 @@ def index(request):
 @login_required
 def topics(request):
     # Выводит список тем
-    if Topic.public = False:
+    if Topic.public == False:
         topics = Topic.objects.filter(owner=request.user).order_by('date_added')
+    elif Topic.public == True:
+        topics = Topic.objects.filter(public=True)
     context = {'topics': topics}
     return render(request, 'learning_logs/topics.html', context)
 
@@ -90,12 +92,13 @@ def more(request):
 @login_required
 def new_topic_public(request):
     """Oпределяет новую тему """
+    Topic.public = True
     if request.method != 'POST':
         """ Данные не отправлялись; создается пустая форма """
         form = TopicForm()
     else:
         """ отправленные данные POST, обработать данные"""
-        form = TopicForm(data=request.POST, public=True)
+        form = TopicForm(data=request.POST)
         if form.is_valid():
             new_topic = form.save(commit=False)
             new_topic.owner = request.user
