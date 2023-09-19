@@ -7,18 +7,27 @@
 {% block content %}
   <ul>
     {% for topic in topics %}
-    {% if topic.public %}
       <li><h4>
-        <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}
-          {% if topic.public %}
-            : public
-          {% endif %}
-        </a>
-      </h4></li>
+        <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
+      </h4>
+      </li>
     {% empty %}
     <li><h3>No topics have been added yet.</h3></li>
     {% endfor %}
   </ul>
+  <ul>
+    {% for topic in topics %}
+    {% if topic.public %}
+      <li><h6>
+        <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }} : Public</a>
+      </h6>
+      </li>
+    {% empty %}
+    <li><h3>No topics have been added yet.</h3></li>
+    {% endfor %}
+    {% endif %}
+  </ul>
+
 <h2><a href="{% url 'learning_logs:new_topic' %}">Add a new topic</a></h2>
 
 {% endblock content %}
