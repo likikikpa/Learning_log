@@ -21,7 +21,7 @@ def topics(request):
     else:
         topics = []  # Add a default value if neither condition is met
 
-    context = {'topics': topics, 'Topic': Topic}
+    context = {'topics': topics}
     return render(request, 'learning_logs/topics.html', context)
 
 @login_required

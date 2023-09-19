@@ -7,7 +7,7 @@
 {% block content %}
   <ul>
     {% for topic in topics %}
-    {% if Topic.public == True %}
+    {% if topic.public == True %}
       <li><h4>
         <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }} : public</a>
       </h4>
