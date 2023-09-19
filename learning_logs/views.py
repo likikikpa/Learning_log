@@ -21,7 +21,7 @@ def topics(request):
     else:
         topics = []  # Add a default value if neither condition is met
 
-    context = {'topics': topics}
+    context = {'topics': topics, 'Topic': Topic}
     return render(request, 'learning_logs/topics.html', context)
 
 @login_required
@@ -92,24 +92,6 @@ def edit_entry(request, entry_id):
 
 def more(request):
     return render(request, 'learning_logs/more.html')
-@login_required
-def new_topic_public(request):
-    """Oпределяет новую тему """
-    Topic.public = True
-    if request.method != 'POST':
-        """ Данные не отправлялись; создается пустая форма """
-        form = TopicForm()
-    else:
-        """ отправленные данные POST, обработать данные"""
-        form = TopicForm(data=request.POST)
-        if form.is_valid():
-            new_topic = form.save(commit=False)
-            new_topic.owner = request.user
-            new_topic.save()
-            return redirect('learning_logs:topics')
-    # Вывести пустую или не действительную форму
-    context = {'form': form, 'TopicForm': TopicForm}
-    return render(request, 'learning_logs/new_topic_public.html', context)
 
 
 # Рефракторинг
