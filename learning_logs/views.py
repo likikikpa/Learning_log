@@ -15,9 +15,12 @@ def index(request):
 def topics(request):
     # Выводит список тем
     if Topic.public == False:
-        topics = Topic.objects.filter(owner=request.user).order_by('date_added')
+        topics = Topic.objects.filter(owner=request.user, public=False).order_by('date_added')
     elif Topic.public == True:
         topics = Topic.objects.filter(public=True)
+    else:
+        topics = []  # Add a default value if neither condition is met
+
     context = {'topics': topics}
     return render(request, 'learning_logs/topics.html', context)
 
