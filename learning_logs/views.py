@@ -14,10 +14,7 @@ def index(request):
 @login_required
 def topics(request):
     # Выводит список тем
-    if Topic.public:
-        topics = Topic.objects.filter(public=True)
-    else:
-        topics = Topic.objects.filter(owner=request.user, public=False).order_by('date_added')
+    topics = Topic.objects.filter(owner=request.user, public=False).order_by('date_added')
     context = {'topics': topics}
     return render(request, 'learning_logs/topics.html', context)
 
