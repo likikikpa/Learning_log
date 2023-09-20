@@ -16,8 +16,7 @@
     {% endfor %}
   </ul>
   <ul>
-    {% if topic.public %}
-    {% for topic in topics %}
+    {% for topic in topics_public %}
       <li><h6>
         <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }} : Public</a>
       </h6>
@@ -25,7 +24,6 @@
     {% empty %}
       <li><h3>No topics have been added yet.</h3></li>
     {% endfor %}
-    {% endif %}
   </ul>
 
 <h2><a href="{% url 'learning_logs:new_topic' %}">Add a new topic</a></h2>

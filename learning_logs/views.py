@@ -15,7 +15,8 @@ def index(request):
 def topics(request):
     # Выводит список тем
     topics = Topic.objects.filter(owner=request.user, public=False).order_by('date_added')
-    context = {'topics': topics}
+    topics_public = Topic.objects.filter(public=True).order_by('date_added')
+    context = {'topics': topics, 'topics_public': topics_public}
     return render(request, 'learning_logs/topics.html', context)
 
 @login_required
